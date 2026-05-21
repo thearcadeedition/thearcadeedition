@@ -281,7 +281,7 @@ const GAMES = [
     {
         title: "1v1.lol",
         file:  "1v1lol.html",
-        img:   "1v1.lol.webp",
+        img:   "gameimages/1v1lol.webp",
         tags:  ["io", "multiplayer", "action"]
     },
 
