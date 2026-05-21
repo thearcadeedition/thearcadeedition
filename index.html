@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Game Vault — free unblocked games.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>My Game Vault</title>
+    <link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="wordmark" href="/">
+                <img src="favicon.png" alt="logo">
+                My Game Vault
+            </a>
+            <nav class="site-nav">
+                <!-- Add nav links here if you want -->
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="controls-bar">
+            <input id="search" type="search" placeholder="search games..." autocomplete="off" spellcheck="false">
+            <div class="tag-filters" id="tag-filters">
+                <button class="tag-btn active" data-tag="all">All</button>
+                <button class="tag-btn" data-tag="action">Action</button>
+                <button class="tag-btn" data-tag="puzzle">Puzzle</button>
+                <button class="tag-btn" data-tag="racing">Racing</button>
+                <button class="tag-btn" data-tag="sports">Sports</button>
+                <button class="tag-btn" data-tag="horror">Horror</button>
+                <button class="tag-btn" data-tag="idle">Idle</button>
+                <button class="tag-btn" data-tag="platformer">Platformer</button>
+                <button class="tag-btn" data-tag="rpg">RPG</button>
+                <button class="tag-btn" data-tag="sandbox">Sandbox</button>
+                <button class="tag-btn" data-tag="multiplayer">Multiplayer</button>
+                <button class="tag-btn" data-tag="io">IO</button>
+            </div>
+        </section>
+
+        <!-- "For You" shelf, shown when history exists -->
+        <section class="shelf" id="for-you" style="display:none">
+            <div class="shelf-title">For You</div>
+            <div class="shelf-row" id="suggestions-row"></div>
+        </section>
+
+        <p id="no-results" class="no-results" style="display:none">No games found.</p>
+        <div class="game-grid" id="game-grid"></div>
+    </main>
+
+    <footer class="site-footer">
+        <p>My Game Vault</p>
+    </footer>
+
+    <!-- Load your game list first, then the app logic -->
+    <script src="games.js"></script>
+    <script src="assets/app.js"></script>
+</body>
+</html>

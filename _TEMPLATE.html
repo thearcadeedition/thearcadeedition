@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME TITLE</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0b0b0d;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            overflow: hidden;
+        }
+
+        header {
+            background: #141417;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            padding: 0 16px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        header a {
+            color: #f5a623;
+            text-decoration: none;
+            font-size: 13px;
+            opacity: 0.9;
+            transition: opacity 0.15s;
+        }
+        header a:hover { opacity: 1; }
+
+        .sep {
+            color: rgba(255,255,255,0.2);
+            font-size: 13px;
+        }
+
+        .game-title {
+            color: #e2e2e6;
+            font-size: 13px;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .fullscreen-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+            color: #7a7a82;
+            font-size: 12px;
+            padding: 4px 10px;
+            cursor: pointer;
+            transition: color 0.15s, border-color 0.15s;
+            font-family: inherit;
+        }
+        .fullscreen-btn:hover { color: #e2e2e6; border-color: rgba(255,255,255,0.25); }
+
+        iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">← Home</a>
+        <span class="sep">/</span>
+        <span class="game-title">GAME TITLE</span>
+        <button class="fullscreen-btn" onclick="document.querySelector('iframe').requestFullscreen()">⛶ Fullscreen</button>
+    </header>
+
+    <!--
+        Replace the src below with your game's embed URL.
+        Common sources:
+          - itch.io embed:      https://itch.io/embed-upload/GAMEID?color=0b0b0d
+          - direct HTML5 file:  just src="path/to/game/index.html"
+          - ruffle (Flash):     wrap with ruffle loader (see ruffle.html template)
+    -->
+    <iframe
+        src="PASTE_GAME_URL_HERE"
+        allowfullscreen
+        allow="autoplay; fullscreen; gamepad"
+        scrolling="no"
+    ></iframe>
+</body>
+</html>
