@@ -257,7 +257,7 @@ const GAMES = [
     // ── IO ────────────────────────────────────────────────────
     {
         title: "1v1.lol",
-        file:  "1v1maybeidk.html",
+        file:  "1v1lol.html",
         img:   "1v1lol.webp", 
         tags:  ["io", "multiplayer", "action"]
     },
