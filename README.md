@@ -1,4 +1,4 @@
-# My Game Vault
+# 🎮 The Arcade Edition
 
 An unblocked games site that runs HTML5 games. Hosted on GitHub Pages.
 
