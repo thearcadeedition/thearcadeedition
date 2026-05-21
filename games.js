@@ -154,7 +154,7 @@ const GAMES = [
 
     // ── IDLE ─────────────────────────────────────────────────
     {
-        title: "1 cl1",
+        title: "1",
         file:  "1.html",
         img:   "1.webp",
         tags:  ["idle"]
