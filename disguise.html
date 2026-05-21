@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png" id="favicon-link">
+    <title id="page-title">Tab Disguise — My Game Vault</title>
+    <link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+
+<header class="site-header" id="site-header">
+    <div class="header-inner">
+        <a class="wordmark" href="index.html">
+            <span class="wordmark-icon">🎮</span>
+            <span class="wordmark-text">MY <span class="accent">GAME</span> VAULT</span>
+        </a>
+        <nav class="site-nav">
+            <a href="index.html" class="nav-link" data-page="home">Home</a>
+            <a href="allgames.html" class="nav-link" data-page="games">All Games</a>
+            <a href="disguise.html" class="nav-link active" data-page="disguise">Disguise</a>
+        </nav>
+        <div class="header-right">
+            <button class="search-toggle" id="search-toggle" aria-label="Search">🔍 Search games...</button>
+        </div>
+    </div>
+    <div class="search-dropdown" id="search-dropdown" style="display:none">
+        <input id="header-search" type="search" placeholder="Search games..." autocomplete="off" spellcheck="false">
+        <div class="search-results" id="search-results"></div>
+    </div>
+</header>
+
+<main class="disguise-main">
+    <canvas id="network-canvas" class="bg-canvas"></canvas>
+
+    <div class="disguise-content">
+        <p class="stealth-label">STEALTH MODE</p>
+        <h1 class="disguise-title">TAB DISGUISE</h1>
+        <p class="disguise-sub">Make your browser tab look like something harmless. Pick a preset or set your own emoji and title.</p>
+
+        <!-- Tab preview -->
+        <div class="tab-preview-wrap">
+            <div class="fake-browser">
+                <div class="fake-tab" id="fake-tab">
+                    <span id="preview-favicon">🎮</span>
+                    <span id="preview-title">My Game Vault</span>
+                    <span class="fake-close">✕</span>
+                </div>
+                <div class="fake-bar">
+                    <span class="fake-arrows">← →</span>
+                    <span class="fake-url" id="preview-url">yourname.github.io/vault</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Presets -->
+        <p class="disguise-section-label">PRESETS</p>
+        <div class="preset-grid" id="preset-grid">
+            <button class="preset-btn" data-emoji="📁" data-name="Google Drive">
+                <span class="preset-icon">📁</span>
+                <span>GOOGLE DRIVE</span>
+            </button>
+            <button class="preset-btn" data-emoji="🔍" data-name="Google">
+                <span class="preset-icon">🔍</span>
+                <span>GOOGLE</span>
+            </button>
+            <button class="preset-btn" data-emoji="🟢" data-name="Khan Academy">
+                <span class="preset-icon">🟢</span>
+                <span>KHAN ACADEMY</span>
+            </button>
+            <button class="preset-btn" data-emoji="📝" data-name="Google Docs">
+                <span class="preset-icon">📝</span>
+                <span>GOOGLE DOCS</span>
+            </button>
+            <button class="preset-btn" data-emoji="📊" data-name="Google Slides">
+                <span class="preset-icon">📊</span>
+                <span>GOOGLE SLIDES</span>
+            </button>
+            <button class="preset-btn" data-emoji="📚" data-name="Canvas LMS">
+                <span class="preset-icon">📚</span>
+                <span>CANVAS LMS</span>
+            </button>
+        </div>
+
+        <!-- Custom -->
+        <p class="disguise-section-label">CUSTOM</p>
+        <div class="custom-row">
+            <input id="custom-emoji" type="text" maxlength="2" placeholder="🎮" class="emoji-input">
+            <input id="custom-title" type="text" placeholder="Enter tab title..." class="title-input">
+            <button class="apply-btn" id="apply-btn">Apply</button>
+        </div>
+
+        <!-- Reset -->
+        <button class="reset-btn" id="reset-btn">↩ Reset to Default</button>
+    </div>
+</main>
+
+<script src="games.js"></script>
+<script src="assets/disguise.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    initNetwork();
+
+    const previewFavicon = document.getElementById('preview-favicon');
+    const previewTitle   = document.getElementById('preview-title');
+    const customEmoji    = document.getElementById('custom-emoji');
+    const customTitle    = document.getElementById('custom-title');
+
+    function updatePreview(emoji, name) {
+        previewFavicon.textContent = emoji;
+        previewTitle.textContent   = name.slice(0, 22) + (name.length > 22 ? '…' : '');
+    }
+
+    // Load saved disguise into preview
+    const saved = getDisguise();
+    if (saved) {
+        updatePreview(saved.emoji, saved.name);
+        customEmoji.value = saved.emoji;
+        customTitle.value = saved.name;
+    }
+
+    // Live preview while typing
+    customEmoji.addEventListener('input', () => {
+        updatePreview(customEmoji.value || '🎮', customTitle.value || 'My Game Vault');
+    });
+    customTitle.addEventListener('input', () => {
+        updatePreview(customEmoji.value || '🎮', customTitle.value || 'My Game Vault');
+    });
+
+    // Presets
+    document.getElementById('preset-grid').addEventListener('click', e => {
+        const btn = e.target.closest('.preset-btn');
+        if (!btn) return;
+        const emoji = btn.dataset.emoji;
+        const name  = btn.dataset.name;
+        customEmoji.value = emoji;
+        customTitle.value = name;
+        updatePreview(emoji, name);
+        applyDisguise(emoji, name);
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+
+    // Apply button
+    document.getElementById('apply-btn').addEventListener('click', () => {
+        const emoji = customEmoji.value.trim() || '🎮';
+        const name  = customTitle.value.trim() || 'My Game Vault';
+        applyDisguise(emoji, name);
+        updatePreview(emoji, name);
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    });
+
+    // Reset
+    document.getElementById('reset-btn').addEventListener('click', () => {
+        clearDisguise();
+        customEmoji.value = '';
+        customTitle.value = '';
+        updatePreview('🎮', 'My Game Vault');
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    });
+});
+</script>
+</body>
+</html>

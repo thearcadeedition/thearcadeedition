@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../favicon.png" id="favicon-link">
+    <title id="page-title">GAME TITLE — My Game Vault</title>
+    <link rel="stylesheet" href="../assets/app.css">
+    <style>
+        body { overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+        .game-wrapper { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+        .game-bar {
+            background: #141417;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            padding: 0 14px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+        .game-bar a { color: #f5a623; text-decoration: none; font-size: 13px; }
+        .game-bar-sep { color: rgba(255,255,255,0.2); }
+        .game-bar-title { color: #e2e2e6; font-size: 13px; font-weight: 700; flex: 1; text-transform: uppercase; letter-spacing: 0.05em; }
+        .game-bar-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+            color: #7a7a82;
+            font-size: 12px;
+            padding: 5px 11px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: color 0.15s, border-color 0.15s, background 0.15s;
+        }
+        .game-bar-btn:hover { color: #e2e2e6; border-color: rgba(255,255,255,0.3); }
+        .game-bar-btn.expanded { background: rgba(245,166,35,0.15); border-color: #f5a623; color: #f5a623; }
+        .game-frame-wrap { flex: 1; position: relative; min-height: 0; transition: all 0.25s ease; }
+        .game-frame-wrap.expanded {
+            position: fixed;
+            top: 44px;
+            left: 0; right: 0; bottom: 0;
+            z-index: 50;
+            background: #000;
+        }
+        iframe { width: 100%; height: 100%; border: none; display: block; }
+    </style>
+</head>
+<body>
+
+<header class="site-header" id="site-header" style="position:relative;z-index:100;flex-shrink:0;">
+    <div class="header-inner">
+        <a class="wordmark" href="../index.html">
+            <span class="wordmark-icon">🎮</span>
+            <span class="wordmark-text">MY <span class="accent">GAME</span> VAULT</span>
+        </a>
+        <nav class="site-nav">
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="../allgames.html" class="nav-link">All Games</a>
+            <a href="../disguise.html" class="nav-link">Disguise</a>
+        </nav>
+        <div class="header-right">
+            <button class="search-toggle" id="search-toggle">🔍 Search...</button>
+        </div>
+    </div>
+    <div class="search-dropdown" id="search-dropdown" style="display:none">
+        <input id="header-search" type="search" placeholder="Search games..." autocomplete="off">
+        <div class="search-results" id="search-results"></div>
+    </div>
+</header>
+
+<div class="game-wrapper">
+    <div class="game-bar">
+        <a href="../allgames.html">← Back</a>
+        <span class="game-bar-sep">/</span>
+        <span class="game-bar-title">GAME TITLE</span>
+        <button class="game-bar-btn" id="expand-btn" onclick="toggleExpand()">⛶ Expand</button>
+    </div>
+    <div class="game-frame-wrap" id="game-frame-wrap">
+        <iframe
+            id="game-iframe"
+            src="PASTE_GAME_URL_HERE"
+            allowfullscreen
+            allow="autoplay; fullscreen; gamepad"
+            scrolling="no"
+        ></iframe>
+    </div>
+</div>
+
+<script src="../games.js"></script>
+<script src="../assets/disguise.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+let expanded = false;
+function toggleExpand() {
+    expanded = !expanded;
+    const wrap = document.getElementById('game-frame-wrap');
+    const btn  = document.getElementById('expand-btn');
+    wrap.classList.toggle('expanded', expanded);
+    btn.classList.toggle('expanded', expanded);
+    btn.textContent = expanded ? '⊡ Shrink' : '⛶ Expand';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && expanded) toggleExpand(); });
+</script>
+</body>
+</html>
