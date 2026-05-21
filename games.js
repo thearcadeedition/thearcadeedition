@@ -17,308 +17,251 @@ const GAMES = [
 
     // ── ACTION ───────────────────────────────────────────────
     {
-        title: "Doom 1",
-        file:  "doom1.html",
-        img:   "doom1.png",
+        title: "10 Minutes Till Dawn",
+        file:  "10minutestildawn.html",
+        img:   "10minutestildawn.webp",
         tags:  ["action"]
     },
     {
-        title: "Doom 2",
-        file:  "doom2.html",
-        img:   "doom2.webp",
+        title: "20 Minutes Till Dawn",
+        file:  "20minutestildawn.html",
+        img:   "20minutestildawn.webp",
         tags:  ["action"]
     },
     {
-        title: "Half-Life",
-        file:  "halflife.html",
-        img:   "halflife.png",
+        title: "10 Bullets",
+        file:  "10bullet.html",
+        img:   "10bullet.webp",
         tags:  ["action"]
     },
     {
-        title: "Counter-Strike 1.6",
-        file:  "counterstrike1.6.html",
-        img:   "counterstrike1.6.jpg",
-        tags:  ["action", "multiplayer"]
-    },
-    {
-        title: "Hotline Miami",
-        file:  "hotlinemiami.html",
-        img:   "hotlinemiami.png",
+        title: "10 More Bullets",
+        file:  "10morebullets.html",
+        img:   "10morebullets.webp",
         tags:  ["action"]
     },
     {
-        title: "Ultrakill",
-        file:  "ultrakillgame.html",
-        img:   "ultrakill.jpg",
+        title: "2Doom",
+        file:  "2doomy.html",
+        img:   "2doomy.webp",
+        tags:  ["action"]
+    },
+    {
+        title: "500 Caliber Contractz",
+        file:  "500calibercontractz.html",
+        img:   "500calibercontractz.webp",
+        tags:  ["action"]
+    },
+    {
+        title: "99 Nights In The Forest",
+        file:  "99nightsitf.html",
+        img:   "99nightsitf.webp",
         tags:  ["action"]
     },
 
     // ── PUZZLE ───────────────────────────────────────────────
     {
         title: "2048",
-        file:  "2048game.html",
-        img:   "2048.png",
+        file:  "2048.html",
+        img:   "2048.webp",
         tags:  ["puzzle"]
     },
     {
-        title: "Tetris",
-        file:  "tetrisgame.html",
-        img:   "tetris.png",
+        title: "2048 Merge Run",
+        file:  "2048mergerun.html",
+        img:   "2048mergerun.webp",
+        tags:  ["puzzle", "idle"]
+    },
+    {
+        title: "20 Small Mazes",
+        file:  "20smallmazes.html",
+        img:   "20smallmazes.webp",
         tags:  ["puzzle"]
     },
     {
-        title: "Cut the Rope",
-        file:  "cuttherope.html",
-        img:   "cuttherope.png",
+        title: "3 Slices 2",
+        file:  "3slices2.html",
+        img:   "3slices2.webp",
         tags:  ["puzzle"]
     },
     {
-        title: "Bloxorz",
-        file:  "bloxorzgame.html",
-        img:   "bloxorz.png",
+        title: "40xescape",
+        file:  "40escape.html",
+        img:   "40escape.webp",
         tags:  ["puzzle"]
     },
     {
-        title: "Little Alchemy",
-        file:  "littlealchemy.html",
-        img:   "littlealchemy.png",
+        title: "9007199254740992",
+        file:  "9007199254740992.html",
+        img:   "9007199254740992.webp",
         tags:  ["puzzle"]
     },
     {
-        title: "Little Alchemy 2",
-        file:  "littlealchemy2.html",
-        img:   "littlealchemy2.png",
-        tags:  ["puzzle"]
-    },
-
-    // ── PLATFORMER ───────────────────────────────────────────
-    {
-        title: "Geometry Dash",
-        file:  "geometrydash.html",
-        img:   "geometrydash.png",
-        tags:  ["platformer"]
-    },
-    {
-        title: "Celeste",
-        file:  "celestegame.html",
-        img:   "celeste.png",
-        tags:  ["platformer"]
-    },
-    {
-        title: "Super Mario Bros",
-        file:  "supermariobros.html",
-        img:   "supermariobros.png",
-        tags:  ["platformer"]
-    },
-    {
-        title: "Hollow Knight",
-        file:  "hollowknight.html",
-        img:   "hollowknight.png",
-        tags:  ["platformer", "rpg"]
-    },
-    {
-        title: "Pizza Tower",
-        file:  "pizzatower.html",
-        img:   "pizzatower.png",
-        tags:  ["platformer"]
-    },
-    {
-        title: "Getting Over It",
-        file:  "gettingoverit.html",
-        img:   "gettingoverit.jpg",
-        tags:  ["platformer"]
+        title: "99 Balls",
+        file:  "99balls.html",
+        img:   "99balls.webp",
+        tags:  ["puzzle", "idle"]
     },
 
     // ── RACING ───────────────────────────────────────────────
     {
-        title: "Drift Hunters",
-        file:  "drifthunters.html",
-        img:   "drifthunters.png",
-        tags:  ["racing"]
-    },
-    {
-        title: "Moto X3M",
-        file:  "motox3m.html",
-        img:   "motox3m.png",
-        tags:  ["racing"]
-    },
-    {
-        title: "Moto X3M 2",
-        file:  "motox3m2.html",
-        img:   "motox3m2.png",
-        tags:  ["racing"]
-    },
-    {
-        title: "Polytrack",
-        file:  "polytrack.html",
-        img:   "polytrack.png",
-        tags:  ["racing"]
-    },
-
-    // ── SANDBOX ──────────────────────────────────────────────
-    {
-        title: "Minecraft 1.21.4",
-        file:  "minecraft1.21.4.html",
-        img:   "minecraft.webp",
-        tags:  ["sandbox", "multiplayer"]
-    },
-    {
-        title: "Minecraft 1.12.2",
-        file:  "minecraft1.12.2.html",
-        img:   "minecraft.webp",
-        tags:  ["sandbox"]
-    },
-    {
-        title: "Terraria",
-        file:  "terrariagame.html",
-        img:   "terraria.png",
-        tags:  ["sandbox", "rpg"]
-    },
-    {
-        title: "People Playground",
-        file:  "peopleplayground.html",
-        img:   "peopleplayground.jpg",
-        tags:  ["sandbox"]
-    },
-
-    // ── RPG ──────────────────────────────────────────────────
-    {
-        title: "Undertale",
-        file:  "undertalegame.html",
-        img:   "undertale.png",
-        tags:  ["rpg"]
-    },
-    {
-        title: "Omori",
-        file:  "omorigame.html",
-        img:   "omori.png",
-        tags:  ["rpg"]
-    },
-    {
-        title: "Deltarune",
-        file:  "deltarunegame.html",
-        img:   "deltarune.png",
-        tags:  ["rpg"]
-    },
-    {
-        title: "Pokemon Emerald",
-        file:  "pokemonemerald.html",
-        img:   "pokemonemerald.jpg",
-        tags:  ["rpg"]
-    },
-    {
-        title: "Pokemon Fire Red",
-        file:  "pokemonfirered.html",
-        img:   "pokemonfirered.jpg",
-        tags:  ["rpg"]
-    },
-
-    // ── HORROR ───────────────────────────────────────────────
-    {
-        title: "Five Nights at Freddy's",
-        file:  "fnaf.html",
-        img:   "fnaf.jpg",
-        tags:  ["horror"]
-    },
-    {
-        title: "Five Nights at Freddy's 2",
-        file:  "fnaf2.html",
-        img:   "fnaf2.webp",
-        tags:  ["horror"]
-    },
-    {
-        title: "Buckshot Roulette",
-        file:  "buckshotroulette.html",
-        img:   "buckshotroulette.jpg",
-        tags:  ["horror", "action"]
-    },
-    {
-        title: "Slender: The Eight Pages",
-        file:  "slender.html",
-        img:   "slender.webp",
-        tags:  ["horror"]
-    },
-
-    // ── IDLE / CLICKER ────────────────────────────────────────
-    {
-        title: "Cookie Clicker",
-        file:  "cookieclicker.html",
-        img:   "cookieclicker.png",
-        tags:  ["idle"]
-    },
-    {
-        title: "Vampire Survivors",
-        file:  "vampiresurvivors.html",
-        img:   "vampiresurvivors.png",
-        tags:  ["idle", "action"]
-    },
-    {
-        title: "Adventure Capitalist",
-        file:  "adventurecapitalist.html",
-        img:   "adventurecapitalist.png",
-        tags:  ["idle"]
-    },
-
-    // ── IO ────────────────────────────────────────────────────
-    {
-        title: "Agar.io",
-        file:  "agario.html",
-        img:   "agario.jpg",
-        tags:  ["io", "multiplayer"]
-    },
-    {
-        title: "Slither.io",
-        file:  "slitherio.html",
-        img:   "slitherio.jpg",
-        tags:  ["io", "multiplayer"]
-    },
-    {
-        title: "Paper.io 2",
-        file:  "paper.io2.html",
-        img:   "paper.io2.jpg",
-        tags:  ["io", "multiplayer"]
-    },
-    {
-        title: "1v1.lol",
-        file:  "1v1lol.html",
-        img:   "1v1lol.webp",
-        tags:  ["io", "multiplayer", "action"]
+        title: "2D Rocket League",
+        file:  "2drocketleague.html",
+        img:   "2drocketleague.webp",
+        tags:  ["racing", "sports"]
     },
 
     // ── SPORTS ───────────────────────────────────────────────
     {
-        title: "Basketball Stars",
-        file:  "basketballstars.html",
-        img:   "basketballstars.jpg",
-        tags:  ["sports"]
-    },
-    {
-        title: "Soccer Random",
-        file:  "soccerrandom.html",
-        img:   "soccerrandom.jpg",
+        title: "1 On 1 Soccer",
+        file:  "1on1soccer.html",
+        img:   "1on1soccer.webp",
         tags:  ["sports", "multiplayer"]
     },
     {
-        title: "Retro Bowl",
-        file:  "retrobowl.html",
-        img:   "retrobowl.png",
+        title: "1 On 1 Tennis",
+        file:  "1v1tennis.html",
+        img:   "1v1tennis.webp",
+        tags:  ["sports", "multiplayer"]
+    },
+    {
+        title: "3D Bowling",
+        file:  "3dbowling.html",
+        img:   "3dbowling.webp",
         tags:  ["sports"]
     },
-
-    // ── MULTIPLAYER ───────────────────────────────────────────
     {
-        title: "Among Us",
-        file:  "amongus.html",
-        img:   "amongus.png",
-        tags:  ["multiplayer"]
+        title: "4th And Goal",
+        file:  "4thandgoal.html",
+        img:   "4thandgoal.webp",
+        tags:  ["sports"]
     },
     {
-        title: "Friday Night Funkin",
-        file:  "fnf.html",
-        img:   "fnf.webp",
+        title: "8 Ball Classic",
+        file:  "8ballclassic.html",
+        img:   "8ballclassic.webp",
+        tags:  ["sports"]
+    },
+    {
+        title: "8 Ball Pool",
+        file:  "8ballpool.html",
+        img:   "8ballpool.webp",
+        tags:  ["sports", "multiplayer"]
+    },
+
+    // ── HORROR ───────────────────────────────────────────────
+    // (No horror titles were present in this list batch)
+
+    // ── IDLE ─────────────────────────────────────────────────
+    {
+        title: "1 cl1",
+        file:  "1.html",
+        img:   "1.webp",
+        tags:  ["idle"]
+    },
+    {
+        title: "3D Pinball Space Cadet",
+        file:  "3dpinballspacecadet.html",
+        img:   "3dpinballspacecadet.webp",
+        tags:  ["idle"]
+    },
+    {
+        title: "30 Dollar Haircut",
+        file:  "30dollarhaircut.html",
+        img:   "30dollarhaircut.webp",
+        tags:  ["idle"]
+    },
+    {
+        title: "64 in 1",
+        file:  "64in1.html",
+        img:   "64in1.webp",
+        tags:  ["idle"]
+    },
+
+    // ── PLATFORMER ───────────────────────────────────────────
+    {
+        title: "3Dash",
+        file:  "3dashy.html",
+        img:   "3dashy.webp",
+        tags:  ["platformer"]
+    },
+    {
+        title: "3 Pandas",
+        file:  "3pandas.html",
+        img:   "3pandas.webp",
+        tags:  ["platformer", "puzzle"]
+    },
+    {
+        title: "3 Pandas Night",
+        file:  "3pandasnight.html",
+        img:   "3pandasnight.webp",
+        tags:  ["platformer", "puzzle"]
+    },
+    {
+        title: "3 Pandas Brazil",
+        file:  "3pandasbrazil.html",
+        img:   "3pandasbrazil.webp",
+        tags:  ["platformer", "puzzle"]
+    },
+    {
+        title: "3 Pandas Fantasy",
+        file:  "3pandasfantasy.html",
+        img:   "3pandasfantasy.webp",
+        tags:  ["platformer", "puzzle"]
+    },
+    {
+        title: "3 Pandas Japan",
+        file:  "3pandasjapan.html",
+        img:   "3pandasjapan.webp",
+        tags:  ["platformer", "puzzle"]
+    },
+    {
+        title: "60 Seconds Burger Run",
+        file:  "60secondsburgerrun.html",
+        img:   "60secondsburgerrun.webp",
+        tags:  ["platformer", "action"]
+    },
+    {
+        title: "60 Seconds Santa Run",
+        file:  "santarun.html",
+        img:   "santarun.webp",
+        tags:  ["platformer", "action"]
+    },
+
+    // ── RPG ──────────────────────────────────────────────────
+    // (No RPG titles were present in this list batch)
+
+    // ── SANDBOX ──────────────────────────────────────────────
+    // (No sandbox titles were present in this list batch)
+
+    // ── MULTIPLAYER ──────────────────────────────────────────
+    {
+        title: "12 Mini Battles",
+        file:  "12minibattles.html",
+        img:   "12minibattles.webp",
+        tags:  ["multiplayer", "action"]
+    },
+    {
+        title: "10-103 Null Kevin",
+        file:  "nullkevin.html",
+        img:   "nullkevin.webp",
+        tags:  ["multiplayer", "action"]
+    },
+    {
+        title: "2-3-4 Player Games",
+        file:  "234playergame.html",
+        img:   "234playergame.webp",
         tags:  ["multiplayer"]
     },
 
+    // ── IO ────────────────────────────────────────────────────
+    {
+        title: "1v1.lol",
+        file:  "1v1maybeidk.html",
+        img:   "1v1lol.webp", 
+        tags:  ["io", "multiplayer", "action"]
+    },
+    
     // ADD MORE GAMES BELOW THIS LINE ──────────────────────────
     // {
     //     title: "My New Game",
