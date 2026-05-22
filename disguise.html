@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,61 +40,58 @@
     <div class="disguise-content">
         <p class="stealth-label">STEALTH MODE</p>
         <h1 class="disguise-title">TAB DISGUISE</h1>
-        <p class="disguise-sub">Make your browser tab look like something harmless. Pick a preset or set your own emoji and title.</p>
+        <p class="disguise-sub">Make your browser tab look like something harmless. Pick a preset or set your own custom text.</p>
 
-        <!-- Tab preview -->
         <div class="tab-preview-wrap">
             <div class="fake-browser">
-                <div class="fake-tab" id="fake-tab">
-                    <span id="preview-favicon">🎮</span>
-                    <span id="preview-title">My Game Vault</span>
-                    <span class="fake-close">✕</span>
+                <div class="fake-header-bar">
+                    <div class="fake-tab" id="fake-tab">
+                        <img src="favicon.png" id="preview-favicon" alt="Favicon" onerror="this.src='favicon.png'">
+                        <span id="preview-title">My Game Vault</span>
+                        <span class="fake-close">✕</span>
+                    </div>
                 </div>
                 <div class="fake-bar">
-                    <span class="fake-arrows">← →</span>
+                    <span class="fake-arrows">← → ↻</span>
                     <span class="fake-url" id="preview-url">yourname.github.io/vault</span>
                 </div>
             </div>
         </div>
 
-        <!-- Presets -->
         <p class="disguise-section-label">PRESETS</p>
         <div class="preset-grid" id="preset-grid">
-            <button class="preset-btn" data-emoji="📁" data-name="Google Drive">
-                <span class="preset-icon">📁</span>
+            <button class="preset-btn" data-icon="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" data-name="My Drive - Google Drive">
+                <img src="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" class="preset-icon" style="width:28px; height:28px; object-fit:contain;" alt="">
                 <span>GOOGLE DRIVE</span>
             </button>
-            <button class="preset-btn" data-emoji="🔍" data-name="Google">
-                <span class="preset-icon">🔍</span>
+            <button class="preset-btn" data-icon="https://www.google.com/favicon.ico" data-name="Google">
+                <img src="https://www.google.com/favicon.ico" class="preset-icon" style="width:28px; height:28px; object-fit:contain;" alt="">
                 <span>GOOGLE</span>
             </button>
-            <button class="preset-btn" data-emoji="🟢" data-name="Khan Academy">
-                <span class="preset-icon">🟢</span>
+            <button class="preset-btn" data-icon="https://www.khanacademy.org/favicon.ico" data-name="Khan Academy">
+                <img src="https://www.khanacademy.org/favicon.ico" class="preset-icon" style="width:28px; height:28px; object-fit:contain;" alt="">
                 <span>KHAN ACADEMY</span>
             </button>
-            <button class="preset-btn" data-emoji="📝" data-name="Google Docs">
-                <span class="preset-icon">📝</span>
+            <button class="preset-btn" data-icon="https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico" data-name="Google Docs">
+                <img src="https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico" class="preset-icon" style="width:28px; height:28px; object-fit:contain;" alt="">
                 <span>GOOGLE DOCS</span>
             </button>
-            <button class="preset-btn" data-emoji="📊" data-name="Google Slides">
-                <span class="preset-icon">📊</span>
+            <button class="preset-btn" data-icon="https://ssl.gstatic.com/docs/presentations/images/slides-favicon-2023q4.ico" data-name="Google Slides">
+                <img src="https://ssl.gstatic.com/docs/presentations/images/slides-favicon-2023q4.ico" class="preset-icon" style="width:28px; height:28px; object-fit:contain;" alt="">
                 <span>GOOGLE SLIDES</span>
             </button>
-            <button class="preset-btn" data-emoji="📚" data-name="Canvas LMS">
-                <span class="preset-icon">📚</span>
+            <button class="preset-btn" data-icon="https://canvas.instructure.com/favicon.ico" data-name="Canvas LMS">
+                <img src="https://canvas.instructure.com/favicon.ico" class="preset-icon" style="width:28px; height:28px; object-fit:contain;" alt="">
                 <span>CANVAS LMS</span>
             </button>
         </div>
 
-        <!-- Custom -->
         <p class="disguise-section-label">CUSTOM</p>
         <div class="custom-row">
-            <input id="custom-emoji" type="text" maxlength="2" placeholder="🎮" class="emoji-input">
-            <input id="custom-title" type="text" placeholder="Enter tab title..." class="title-input">
+            <input id="custom-title" type="text" placeholder="Enter custom tab title..." class="title-input">
             <button class="apply-btn" id="apply-btn">Apply</button>
         </div>
 
-        <!-- Reset -->
         <button class="reset-btn" id="reset-btn">↩ Reset to Default</button>
     </div>
 </main>
@@ -106,59 +105,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const previewFavicon = document.getElementById('preview-favicon');
     const previewTitle   = document.getElementById('preview-title');
-    const customEmoji    = document.getElementById('custom-emoji');
     const customTitle    = document.getElementById('custom-title');
 
-    function updatePreview(emoji, name) {
-        previewFavicon.textContent = emoji;
-        previewTitle.textContent   = name.slice(0, 22) + (name.length > 22 ? '…' : '');
+    function updatePreview(iconUrl, name) {
+        previewFavicon.src = iconUrl || 'favicon.png';
+        previewTitle.textContent = name.slice(0, 24) + (name.length > 24 ? '…' : '');
     }
 
-    // Load saved disguise into preview
+    // Load saved disguise into preview panel configuration
     const saved = getDisguise();
     if (saved) {
-        updatePreview(saved.emoji, saved.name);
-        customEmoji.value = saved.emoji;
+        updatePreview(saved.icon, saved.name);
         customTitle.value = saved.name;
+        
+        // Highlight active button preset matches on init
+        document.querySelectorAll('.preset-btn').forEach(b => {
+            if (b.dataset.name === saved.name) b.classList.add('active');
+        });
     }
 
-    // Live preview while typing
-    customEmoji.addEventListener('input', () => {
-        updatePreview(customEmoji.value || '🎮', customTitle.value || 'My Game Vault');
-    });
+    // Live preview dynamic title inputs
     customTitle.addEventListener('input', () => {
-        updatePreview(customEmoji.value || '🎮', customTitle.value || 'My Game Vault');
+        // Fall back to mask icon if typing custom text
+        const currentSaved = getDisguise();
+        const activeIcon = currentSaved ? currentSaved.icon : 'favicon.png';
+        updatePreview(activeIcon, customTitle.value || 'My Game Vault');
     });
 
-    // Presets
+    // Presets configuration trigger
     document.getElementById('preset-grid').addEventListener('click', e => {
         const btn = e.target.closest('.preset-btn');
         if (!btn) return;
-        const emoji = btn.dataset.emoji;
-        const name  = btn.dataset.name;
-        customEmoji.value = emoji;
+        const icon = btn.dataset.icon;
+        const name = btn.dataset.name;
+        
         customTitle.value = name;
-        updatePreview(emoji, name);
-        applyDisguise(emoji, name);
+        updatePreview(icon, name);
+        applyDisguise(icon, name);
+        
         document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
     });
 
-    // Apply button
+    // Apply custom input titles
     document.getElementById('apply-btn').addEventListener('click', () => {
-        const emoji = customEmoji.value.trim() || '🎮';
-        const name  = customTitle.value.trim() || 'My Game Vault';
-        applyDisguise(emoji, name);
-        updatePreview(emoji, name);
+        const name = customTitle.value.trim() || 'My Game Vault';
+        const currentSaved = getDisguise();
+        // Keep current selected preset logo icon, or default back to vault icon
+        const icon = currentSaved ? currentSaved.icon : 'favicon.png';
+        
+        applyDisguise(icon, name);
+        updatePreview(icon, name);
         document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
     });
 
-    // Reset
+    // Reset action
     document.getElementById('reset-btn').addEventListener('click', () => {
         clearDisguise();
-        customEmoji.value = '';
         customTitle.value = '';
-        updatePreview('🎮', 'My Game Vault');
+        updatePreview('favicon.png', 'My Game Vault');
         document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
     });
 });
