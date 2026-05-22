@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.png" id="favicon-link">
     <title id="page-title">My Game Vault</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/app.css">
 </head>
 <body>
 
-<!-- ── NAV ── -->
 <header class="site-header" id="site-header">
     <div class="header-inner">
         <a class="wordmark" href="index.html">
@@ -25,14 +29,12 @@
             <button class="search-toggle" id="search-toggle" aria-label="Search">🔍 Search games...</button>
         </div>
     </div>
-    <!-- Search overlay dropdown -->
     <div class="search-dropdown" id="search-dropdown" style="display:none">
         <input id="header-search" type="search" placeholder="Search games..." autocomplete="off" spellcheck="false">
         <div class="search-results" id="search-results"></div>
     </div>
 </header>
 
-<!-- ── HERO ── -->
 <section class="hero" id="hero">
     <canvas id="network-canvas"></canvas>
     <div class="hero-content">
@@ -45,10 +47,8 @@
     </div>
 </section>
 
-<!-- ── MAIN ── -->
 <main class="home-main">
 
-    <!-- Recently Played -->
     <section class="home-section" id="recent-section">
         <div class="section-header">
             <h2 class="section-title">RECENTLY PLAYED</h2>
@@ -61,7 +61,6 @@
 
     <hr class="section-divider">
 
-    <!-- Popular -->
     <section class="home-section">
         <div class="section-header">
             <h2 class="section-title">🔥 POPULAR</h2>
@@ -72,7 +71,6 @@
 
     <hr class="section-divider">
 
-    <!-- By Category -->
     <section class="home-section">
         <div class="section-header">
             <h2 class="section-title">BROWSE BY CATEGORY</h2>
