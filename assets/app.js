@@ -100,8 +100,11 @@ function initNetwork() {
     nodes = makeNodes(55);
     window.addEventListener('resize', () => { resize(); nodes = makeNodes(55); });
 
-    const DOT_COLOR  = 'rgba(245,166,35,0.55)';
-    const LINE_COLOR = 'rgba(245,166,35,';
+    // Pulls your updated brand color variables dynamically from app.css
+    const styleTokens = getComputedStyle(document.documentElement);
+    const accentColor = styleTokens.getPropertyValue('--accent').trim() || '#f5a623';
+
+    const DOT_COLOR  = accentColor + '8C'; // Appends transparency hex
     const MAX_DIST   = 130;
 
     function draw() {
@@ -117,13 +120,15 @@ function initNetwork() {
                 const dy = nodes[i].y - nodes[j].y;
                 const dist = Math.sqrt(dx*dx + dy*dy);
                 if (dist < MAX_DIST) {
-                    const alpha = (1 - dist / MAX_DIST) * 0.3;
-                    ctx.strokeStyle = LINE_COLOR + alpha + ')';
+                    const alpha = (1 - dist / MAX_DIST) * 0.2;
+                    ctx.strokeStyle = accentColor;
+                    ctx.globalAlpha = alpha;
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(nodes[i].x, nodes[i].y);
                     ctx.lineTo(nodes[j].x, nodes[j].y);
                     ctx.stroke();
+                    ctx.globalAlpha = 1.0; // Reset alpha map
                 }
             }
         }
