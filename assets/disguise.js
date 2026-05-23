@@ -1,6 +1,4 @@
 // ── TAB DISGUISE SYSTEM ─────────────────────────────────────────────
-// Saves properties to localStorage to cleanly persist assets across subdirectories
-
 const DISGUISE_KEY = 'mgv_disguise';
 
 function getDisguise() {
@@ -24,10 +22,8 @@ function clearDisguise() {
         localStorage.removeItem(DISGUISE_KEY); 
     } catch {}
     
-    // Restore clean default title patterns
+    // Fall back safely to the declared layout title id or string standard
     const realTitle = document.getElementById('page-title')?.textContent || 'My Game Vault';
-    
-    // Determine default icon path depending on if we are in a subdirectory folder
     const base = window.location.pathname.includes('gamefiles') ? '../' : '';
     const defaultIcon = base + 'favicon.png';
     
@@ -35,13 +31,10 @@ function clearDisguise() {
 }
 
 function _applyToDOM(icon, name) {
-    // 1. Instantly update the document/tab text title
     document.title = name;
     
-    // 2. Locate the existing favicon link or fallback icon tag
     let favicon = document.getElementById('favicon-link') || document.querySelector("link[rel*='icon']");
     
-    // 3. Build the icon tag structure if it doesn't exist yet
     if (!favicon) {
         favicon = document.createElement('link');
         favicon.rel = 'icon';
@@ -49,11 +42,12 @@ function _applyToDOM(icon, name) {
         document.head.appendChild(favicon);
     }
     
-    // 4. Force browser redraw by cloning the element, altering attributes, and replacing it
-    const newFavicon = favicon.cloneNode(true);
+    // Node swapping technique to bypass aggressive browser tab caching loops
+    const newFavicon = document.createElement('link');
+    newFavicon.id = 'favicon-link';
+    newFavicon.rel = 'icon';
     newFavicon.setAttribute('href', icon);
     
-    // Correctly apply explicit mime-types to guarantee cross-browser compatibility
     if (icon.includes('.ico')) {
         newFavicon.setAttribute('type', 'image/x-icon');
     } else if (icon.includes('.webp')) {
@@ -62,14 +56,23 @@ function _applyToDOM(icon, name) {
         newFavicon.setAttribute('type', 'image/png');
     }
     
-    // Hot-swap the old element in the head block out for the freshly modified one
-    favicon.parentNode.replaceChild(newFavicon, favicon);
+    if (favicon.parentNode) {
+        favicon.parentNode.replaceChild(newFavicon, favicon);
+    } else {
+        document.head.appendChild(newFavicon);
+    }
 }
 
-// Auto-execution hook logic on subpage load instances
-(function() {
+// SAFE EXECUTION ENGINE: Ensures execution fires safely during or after initial layout engine renders
+function _initTabDisguise() {
     const saved = getDisguise();
     if (saved && saved.icon && saved.name) {
         _applyToDOM(saved.icon, saved.name);
     }
-})();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _initTabDisguise);
+} else {
+    _initTabDisguise();
+}
