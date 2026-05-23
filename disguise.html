@@ -102,71 +102,95 @@
 <script src="assets/app.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    initNetwork();
+    // 1. Initialize background animation safely
+    if (typeof initNetwork === 'function') initNetwork();
 
     const previewFavicon = document.getElementById('preview-favicon');
     const previewTitle   = document.getElementById('preview-title');
     const customTitle    = document.getElementById('custom-title');
 
     function updatePreview(iconUrl, name) {
-        previewFavicon.src = iconUrl || 'favicon.png';
-        previewTitle.textContent = name.slice(0, 24) + (name.length > 24 ? '…' : '');
+        if (previewFavicon) previewFavicon.src = iconUrl || 'favicon.png';
+        if (previewTitle) previewTitle.textContent = name.slice(0, 24) + (name.length > 24 ? '…' : '');
     }
 
-    // Load saved disguise into preview panel configuration
-    const saved = getDisguise();
-    if (saved) {
-        updatePreview(saved.icon, saved.name);
-        customTitle.value = saved.name;
+    // 2. Safe execution guard: Wait for disguise system functions to be available
+    function loadSavedDisguise() {
+        if (typeof getDisguise !== 'function') return;
         
-        // Highlight active button preset matches on init
-        document.querySelectorAll('.preset-btn').forEach(b => {
-            if (b.dataset.name === saved.name) b.classList.add('active');
+        const saved = getDisguise();
+        if (saved) {
+            updatePreview(saved.icon, saved.name);
+            if (customTitle) customTitle.value = saved.name;
+            
+            document.querySelectorAll('.preset-btn').forEach(b => {
+                if (b.dataset.name === saved.name) b.classList.add('active');
+            });
+        }
+    }
+
+    // Load initial state
+    loadSavedDisguise();
+
+    // 3. Live preview handling as the user types custom text
+    if (customTitle) {
+        customTitle.addEventListener('input', () => {
+            const currentSaved = typeof getDisguise === 'function' ? getDisguise() : null;
+            const activeIcon = currentSaved ? currentSaved.icon : 'favicon.png';
+            updatePreview(activeIcon, customTitle.value || 'My Game Vault');
         });
     }
 
-    // Live preview dynamic title inputs
-    customTitle.addEventListener('input', () => {
-        // Fall back to mask icon if typing custom text
-        const currentSaved = getDisguise();
-        const activeIcon = currentSaved ? currentSaved.icon : 'favicon.png';
-        updatePreview(activeIcon, customTitle.value || 'My Game Vault');
-    });
+    // 4. Preset selection grid click handler
+    const presetGrid = document.getElementById('preset-grid');
+    if (presetGrid) {
+        presetGrid.addEventListener('click', e => {
+            const btn = e.target.closest('.preset-btn');
+            if (!btn) return;
+            
+            const icon = btn.dataset.icon;
+            const name = btn.dataset.name;
+            
+            if (customTitle) customTitle.value = name;
+            updatePreview(icon, name);
+            
+            if (typeof applyDisguise === 'function') {
+                applyDisguise(icon, name);
+            }
+            
+            document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    }
 
-    // Presets configuration trigger
-    document.getElementById('preset-grid').addEventListener('click', e => {
-        const btn = e.target.closest('.preset-btn');
-        if (!btn) return;
-        const icon = btn.dataset.icon;
-        const name = btn.dataset.name;
-        
-        customTitle.value = name;
-        updatePreview(icon, name);
-        applyDisguise(icon, name);
-        
-        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    });
+    // 5. Apply custom input button configuration
+    const applyBtn = document.getElementById('apply-btn');
+    if (applyBtn && customTitle) {
+        applyBtn.addEventListener('click', () => {
+            const name = customTitle.value.trim() || 'My Game Vault';
+            const currentSaved = typeof getDisguise === 'function' ? getDisguise() : null;
+            const icon = currentSaved ? currentSaved.icon : 'favicon.png';
+            
+            if (typeof applyDisguise === 'function') {
+                applyDisguise(icon, name);
+            }
+            updatePreview(icon, name);
+            document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+        });
+    }
 
-    // Apply custom input titles
-    document.getElementById('apply-btn').addEventListener('click', () => {
-        const name = customTitle.value.trim() || 'My Game Vault';
-        const currentSaved = getDisguise();
-        // Keep current selected preset logo icon, or default back to vault icon
-        const icon = currentSaved ? currentSaved.icon : 'favicon.png';
-        
-        applyDisguise(icon, name);
-        updatePreview(icon, name);
-        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-    });
-
-    // Reset action
-    document.getElementById('reset-btn').addEventListener('click', () => {
-        clearDisguise();
-        customTitle.value = '';
-        updatePreview('favicon.png', 'My Game Vault');
-        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-    });
+    // 6. Reset action execution
+    const resetBtn = document.getElementById('reset-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            if (typeof clearDisguise === 'function') {
+                clearDisguise();
+            }
+            if (customTitle) customTitle.value = '';
+            updatePreview('favicon.png', 'My Game Vault');
+            document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+        });
+    }
 });
 </script>
 </body>
